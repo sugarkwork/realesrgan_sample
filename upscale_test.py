@@ -85,6 +85,10 @@ class ImageUpscaler:
         self.upscaler.start()
 
     def upscale(self, input_path, output_path):
+        if input_path is None or output_path is None:
+            return
+        if not os.path.isfile(input_path):
+            return
         self.queue.put((input_path, output_path))
 
     def stop(self, wait=True):
